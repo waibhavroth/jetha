@@ -1,0 +1,420 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>jehtalal | Photo & Video Gallery</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #000000, #292929, #111111);
+    color: white;
+}
+
+/* NAVBAR */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 8%;
+    border-bottom: 1px solid #333;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+
+nav a {
+    color: #ccc;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 14px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: white;
+}
+
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 100px 20px 80px;
+}
+
+.hero h1 {
+    font-size: clamp(40px, 7vw, 75px);
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #888;
+}
+
+.hero p {
+    color: #aaa;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* SECTION */
+section {
+    padding: 50px 8%;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.section-title h2 {
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+
+.section-title p {
+    color: #888;
+    font-size: 13px;
+}
+
+/* PHOTO GRID */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    height: 260px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #222;
+    cursor: pointer;
+    border: 1px solid #333;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s, opacity .5s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+    opacity: .7;
+}
+
+.gallery-item .overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(transparent, #000);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* VIDEO GRID */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.video-card {
+    background: linear-gradient(145deg, #303030, #111);
+    border: 1px solid #444;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.video-card video {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 9;
+    background: black;
+}
+
+.video-info {
+    padding: 18px;
+}
+
+.video-info h3 {
+    margin-bottom: 8px;
+}
+
+.video-info p {
+    color: #999;
+    font-size: 13px;
+}
+
+/* LIGHTBOX */
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,.95);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.close {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    font-size: 40px;
+    cursor: pointer;
+    color: white;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 35px;
+    border-top: 1px solid #333;
+    color: #888;
+    margin-top: 50px;
+    font-size: 13px;
+}
+
+/* RESPONSIVE */
+@media(max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    nav a {
+        margin: 0 10px;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-item {
+        height: 200px;
+    }
+
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        padding: 35px 5%;
+    }
+}
+
+@media(max-width: 480px) {
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item {
+        height: 250px;
+    }
+
+    .section-title {
+        align-items: flex-start;
+        gap: 10px;
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header>
+    <div class="logo">jethalal.</div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#photos">Photos</a>
+        <a href="#videos">Videos</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero" id="home">
+    <h1>CAPTURE <span>MOMENTS.</span></h1>
+    <p>
+        A collection of beautiful photographs and cinematic videos.
+        <br>Explore moments through our visual gallery.
+    </p>
+</div>
+
+<!-- PHOTO GALLERY -->
+<section id="photos">
+
+    <div class="section-title">
+        <h2>PHOTO GALLERY</h2>
+        <p>01 — 06 / PHOTOGRAPHY</p>
+    </div>
+
+    <div class="gallery">
+
+        <div class="gallery-item">
+            <img src="001.png" alt="Nature landscape">
+            <div class="overlay">01 / click to view full photo</div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="wedding_photo_babita_inspired.png" alt="Night sky">
+            <div class="overlay">02 / click to view full photo</div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="002.png" alt="Mountain lake">
+            <div class="overlay">03 / click to view full photo</div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="003.png" alt="Ocean beach">
+            <div class="overlay">04 / click to view full photo</div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="004.png" alt="Sunrise">
+            <div class="overlay">05 / click to view full photo</div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="005.jpg" alt="Forest">
+            <div class="overlay">06 / click to view full photo</div>
+        </div>
+
+    </div>
+</section>
+
+<!-- VIDEO GALLERY -->
+<section id="videos">
+
+    <div class="section-title">
+        <h2>VIDEO GALLERY</h2>
+        <p>02 — 04 / CINEMATIC</p>
+    </div>
+
+    <div class="video-grid">
+
+        <div class="video-card">
+            <video controls preload="metadata">
+                <source src="video delete.mp4" type="video/mp4">
+            </video>
+            <div class="video-info">
+                <h3>01 / video delete warning </h3>
+                <p>Animation • Video</p>
+            </div>
+        </div>
+
+        <div class="video-card">
+            <video controls preload="metadata">
+                <source src="video001.mp4" type="video/mp4">
+            </video>
+            <div class="video-info">
+                <h3>02 / video</h3>
+                <p>Nature • Video</p>
+            </div>
+        </div>
+
+        <div class="video-card">
+            <video controls preload="metadata">
+                <source src="video003.mp4" type="video/mp4">
+            </video>
+            <div class="video-info">
+                <h3>03 / classroom video</h3>
+                <p>Sample • Video</p>
+            </div>
+        </div>
+
+        <div class="video-card">
+            <video controls preload="metadata">
+                <source src="video06.mp4" type="video/mp4">
+            </video>
+            <div class="video-info">
+                <h3>04 / classroom video </h3>
+                <p>Cinematic • Video</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- IMAGE LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+    <span class="close" id="closeBtn">&times;</span>
+    <img id="lightboxImg" src="" alt="Expanded gallery image">
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 jethalal. ALL RIGHTS RESERVED.</p>
+    <p style="margin-top:10px;">DESIGNED WITH SIMPLICITY.</p>
+</footer>
+
+<script>
+
+// PHOTO LIGHTBOX
+const galleryImages = document.querySelectorAll(".gallery-item img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightboxImg");
+const closeBtn = document.getElementById("closeBtn");
+
+galleryImages.forEach(image => {
+    image.addEventListener("click", () => {
+        lightbox.style.display = "flex";
+        lightboxImg.src = image.src;
+        lightboxImg.alt = image.alt;
+    });
+});
+
+closeBtn.addEventListener("click", () => {
+    lightbox.style.display = "none";
+});
+
+lightbox.addEventListener("click", (event) => {
+    if(event.target === lightbox) {
+        lightbox.style.display = "none";
+    }
+});
+
+// ESC KEY TO CLOSE
+document.addEventListener("keydown", (event) => {
+    if(event.key === "Escape") {
+        lightbox.style.display = "none";
+    }
+});
+
+</script>
+
+</body>
+</html>
